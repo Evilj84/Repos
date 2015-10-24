@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Content management system</title>
+    <meta charset="utf-8"/>
+
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="Content/font-awesome.min.css" />
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+
+    <script src="Scripts/Controllers/Main.js"></script>
+
+    <script>
+        var other = angular.module("other", ["ngRoute"]);
+        var controllers = angular.module("controllers", ["cms.mainCtrl"]);
+
+        var app = angular.module("app", ["other", "controllers"]);
+
+        //Routing
+        app.config(function($routeProvider) {
+            $routeProvider.when("/", {
+                templateUrl: "html/home.html",
+                controller: "mainCtrl"
+            }).when("/about", {
+                templateUrl: "html/activities.html",
+                controller: "activitiesCtrl"
+            });
+        });
+
+    </script>
+
+</head>
+<body ng-controller="mainCtrl">
+
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Angular Routing Example</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                    <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <div id="main">
+
+        {{message}}
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
+
+    </div>
+
+</body>
+</html>
